@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score
+from sklearn.metrics import mean_absolute_percentage_error
 from sklearn.cluster import DBSCAN, KMeans
 import matplotlib.pyplot as plt
 import geopandas as gpd
@@ -241,12 +242,20 @@ train_rmse = mean_squared_error(y_train, y_pred_train) ** 0.5
 test_rmse = mean_squared_error(y_test, y_pred_test) ** 0.5
 test_mae = mean_absolute_error(y_test, y_pred_test)
 
+test_mape = mean_absolute_percentage_error(y_test, y_pred_test)
+accuracy_pct = (1 - test_mape) * 100
+
+# improvement over baseline logic
+baseline_mae = abs(y_test - y_train.mean()).mean()
+print(f"Improvement over baseline: {((baseline_mae - test_mae) / baseline_mae) * 100:.2f}%")
+
 print("\n--- Model Performance ---")
 print(f"Training R² Score: {train_r2:.4f}")
 print(f"Test R² Score: {test_r2:.4f}")
 print(f"Training RMSE: {train_rmse:.4f}")
 print(f"Test RMSE: {test_rmse:.4f}")
-print(f"Test MAE: {test_mae:.4f}")
+print(f"Test MAE (Margin of Error): {test_mae:.4f}") # average point error
+print(f"Model Accuracy (MAPE): {accuracy_pct:.2f}%") # percentage accuracy
 
 # feature importance
 importance_df = pd.DataFrame({
