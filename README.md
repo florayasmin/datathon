@@ -78,27 +78,40 @@ This chart reveals which factors most strongly predict accessibility issue sever
 - **RMSE**: Average prediction error in severity units
 - **MAE**: Mean absolute error across all predictions
 
+---
 
+## Running the Analysis
+
+1. **Prepare your data:**
+   - Place `accessibility.csv` in the project directory
+   - Place `seattle_neighborhoods.geojson` in the project directory
+
+2. **Run the script:**
+   ```bash
+   python accessibility_analysis_modified.py
+   ```
+
+3. **View outputs:**
+   - Open `seattle_accessibility_map.html` in a web browser for interactive exploration
+   - Review PNG files for model diagnostics
+   - Analyze CSV files for detailed results
 ## Project Structure
 
 ```
-accessibility-analysis/
+DATATHON/
+├── accessibility.csv                      # input data
+├── seattle_neighborhoods.geojson          # input shapefile
+├── cluster_neighborhoods.py               # main script
+├── README.md                              # documentation
 │
-├── accessibility_analysis_modified.py   # Main analysis script
-├── README.md                            # This file
-│
-├── data/
-│   ├── accessibility.csv                # Raw accessibility issue data
-│   └── seattle_neighborhoods.geojson    # Neighborhood boundary shapefile
-│
-├── outputs/
-│   ├── seattle_accessibility_map.html   # Interactive map (MAIN OUTPUT)
-│   ├── elbow_method.png                 # Clustering diagnostic
-│   ├── silhouette_analysis.png          # Clustering validation
-│   ├── feature_importance.png           # Model feature analysis
-│   ├── issues_clustered.csv             # Issues with cluster labels
-│   ├── neighborhoods_clustered.csv      # Neighborhood summaries
-│   └── severity_predictions.csv         # Model predictions
+└── outputs/
+    ├── elbow_method.png
+    ├── feature_importance.png
+    ├── silhouette_analysis.png
+    ├── issues_clustered.csv
+    ├── neighborhoods_clustered.csv
+    ├── severity_predictions.csv
+    └── seattle_accessibility_map.html     # interactive visual webpage
 ```
 
 ---
